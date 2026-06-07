@@ -1,0 +1,70 @@
+quick_sort.cpp: In function ‘void quick_sort(int*, int, int)’:
+quick_sort.cpp:15:33: error: ISO C++ forbids using pointer to a function in subtraction [-fpermissive]
+   15 |         int mid = left + (right - left) / 2;
+      |                           ~~~~~~^~~~~~
+quick_sort.cpp:15:24: warning: pointer to a function used in arithmetic [-Wpointer-arith]
+   15 |         int mid = left + (right - left) / 2;
+      |                   ~~~~~^~~~~~~~~~~~~~~~~~~~
+quick_sort.cpp:15:24: error: invalid conversion from ‘std::ios_base& (*)(std::ios_base&)’ to ‘int’ [-fpermissive]
+   15 |         int mid = left + (right - left) / 2;
+      |                   ~~~~~^~~~~~~~~~~~~~~~~~~~
+      |                        |
+      |                        std::ios_base& (*)(std::ios_base&)
+quick_sort.cpp:16:13: error: declaration of ‘int a’ shadows a parameter
+   16 |         int a = a[l], b = a[mid], c = a[r];
+      |             ^
+quick_sort.cpp:11:21: note: ‘int* a’ previously declared here
+   11 | void quick_sort(int a[], int l, int r){
+      |                 ~~~~^~~
+quick_sort.cpp:16:18: error: invalid types ‘int[int]’ for array subscript
+   16 |         int a = a[l], b = a[mid], c = a[r];
+      |                  ^
+quick_sort.cpp:18:17: error: ‘b’ was not declared in this scope
+   18 |         if(a >= b && a <= c || a >= c && a <= b)
+      |                 ^
+quick_sort.cpp:18:27: error: ‘c’ was not declared in this scope
+   18 |         if(a >= b && a <= c || a >= c && a <= b)
+      |                           ^
+quick_sort.cpp:29:21: error: invalid types ‘int[int]’ for array subscript
+   29 |                 if(a[i] < pivot){
+      |                     ^
+quick_sort.cpp:30:37: error: invalid types ‘int[int]’ for array subscript
+   30 |                         int temp = a[lt];
+      |                                     ^
+quick_sort.cpp:31:26: error: invalid types ‘int[int]’ for array subscript
+   31 |                         a[lt] = a[i];
+      |                          ^
+quick_sort.cpp:31:34: error: invalid types ‘int[int]’ for array subscript
+   31 |                         a[lt] = a[i];
+      |                                  ^
+quick_sort.cpp:32:26: error: invalid types ‘int[int]’ for array subscript
+   32 |                         a[i] = temp;
+      |                          ^
+quick_sort.cpp:34:28: error: invalid types ‘int[int]’ for array subscript
+   34 |                 } else if(a[i] > pivot){
+      |                            ^
+quick_sort.cpp:35:37: error: invalid types ‘int[int]’ for array subscript
+   35 |                         int temp = a[gt];
+      |                                     ^
+quick_sort.cpp:36:26: error: invalid types ‘int[int]’ for array subscript
+   36 |                         a[gt] = a[i];
+      |                          ^
+quick_sort.cpp:36:34: error: invalid types ‘int[int]’ for array subscript
+   36 |                         a[gt] = a[i];
+      |                                  ^
+quick_sort.cpp:43:36: error: invalid conversion from ‘int’ to ‘int*’ [-fpermissive]
+   43 |                         quick_sort(a, gt + 1, r);
+      |                                    ^
+      |                                    |
+      |                                    int
+quick_sort.cpp:11:21: note:   initializing argument 1 of ‘void quick_sort(int*, int, int)’
+   11 | void quick_sort(int a[], int l, int r){
+      |                 ~~~~^~~
+quick_sort.cpp:47:36: error: invalid conversion from ‘int’ to ‘int*’ [-fpermissive]
+   47 |                         quick_sort(a, l, lt - 1);
+      |                                    ^
+      |                                    |
+      |                                    int
+quick_sort.cpp:11:21: note:   initializing argument 1 of ‘void quick_sort(int*, int, int)’
+   11 | void quick_sort(int a[], int l, int r){
+      |                 ~~~~^~~
