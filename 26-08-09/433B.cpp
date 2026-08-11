@@ -45,6 +45,8 @@ void merge_sort(vector<int> &num) {
 }
 
 int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
     int n = 0;
     cin >> n;
     vector<int> stones(n, 0);
@@ -54,6 +56,10 @@ int main() {
         prex_sum[i + 1] = prex_sum[i] + stones[i]; 
     }
     merge_sort(stones);
+    vector<long long> prex_sum1(n + 1, 0);
+    for(int i = 0; i < n; ++i) {
+        prex_sum1[i + 1] = prex_sum1[i] + stones[i];
+    }
     int questions = 0;
     cin >> questions;
     for(int i = 0; i < questions; ++i) {
@@ -62,11 +68,7 @@ int main() {
         if(type == 1) {
             cout << prex_sum[right] - prex_sum[left - 1];
         } else {
-            long long sum = 0;
-            for(int i = left; i <= right; ++i) {
-                sum += stones[i - 1];
-            }
-            cout << sum;
+            cout << prex_sum1[right] - prex_sum1[left - 1];
         }
         if(i != questions - 1)
             cout << '\n';
