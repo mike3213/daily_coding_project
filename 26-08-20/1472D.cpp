@@ -27,23 +27,43 @@ int main() {
             if(turn) {
                 if(num_even[i] > num_odd[j]) {
                     scores_A += num_even[i];
+                    i++;
                 } else {
                     j++;
                 }
                 turn = false;
             } else {
-                if(num_odd[i] > num_even[j]) {
-                    scores_B += num_odd[i];
+                if(num_odd[j] > num_even[i]) {
+                    scores_B += num_odd[j];
+                    j++;
                 } else {
                     i++;
                 }
                 turn = true;
             }
         }
-        if(num_even.size() == 0)
-            scores_A = -1;
-        else if(num_odd.size() == 0)
-            scores_B = -1;
+
+        if(i == num_even.size()) {
+            while(j < num_odd.size()) {
+                if(turn) {
+                    turn = false;
+                } else {
+                    scores_B += num_odd[j];
+                    turn = true;
+                }
+                j++;
+            }
+        } else if(j == num_odd.size()) {
+            while(i < num_even.size()) {
+                if(turn) {
+                    scores_A += num_even[i];
+                    turn = false;
+                } else {
+                    turn = true;
+                }
+                i++;
+            }
+        }
         
         if(scores_A > scores_B)
             cout << "Alice";
