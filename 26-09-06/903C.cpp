@@ -20,7 +20,7 @@ void merge(vector<int> &num, int left, int mid, int right, vector<int> &temp) {
 void merge_sort(vector<int> &num) {
     int n = num.size();
     vector<int> temp(n, 0);
-    for(int len = 1; len < n; ++len) {
+    for(int len = 1; len < n; len *= 2) {
         for(int i = 0; i + len < n; i += 2 * len) {
             int left = i, mid = i + len - 1, right = i + 2 * len - 1 < n ? i + 2 * len - 1 : n - 1;
             merge(num, left, mid, right, temp);
@@ -34,8 +34,8 @@ int main() {
     vector<int> boxes(n, 0);
     for(auto &x : boxes)
         cin >> x;
-    //merge_sort(boxes);
-    sort(boxes.begin(), boxes.end());
+    merge_sort(boxes);
+    //sort(boxes.begin(), boxes.end());
     int max_com = 1;
     for(int i = 0; i < n; ++i) {
         int cur_com = 1;
