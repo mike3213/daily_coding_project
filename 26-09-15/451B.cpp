@@ -6,46 +6,34 @@ int main() {
     vector<int> num(n, 0);
     for(auto &x : num)
         cin >> x;
-    if(n == 1) {
-        cout << "YES\n"
-             << "1 1";
-    } else {
-        int cur = 0, cnt_down = 0, start = -1, end = -1;
-        if(num[0] > num[1]) {
-            cur = -1;
-            cnt_down++;
-            start = 0;
-        } else if(num[0] < num[1])
-            cur = 1;
-        for(int i = 2; i < n; ++i) {
-            int next = 0;
-            if(num[i] < num[i - 1])
-                next = -1;
-            else
-                next = 1;
-            if(next == -1 && start == -1) {
-                start = i - 1;
-            }
-            if(start != -1 && next == 1 && end == -1)
-                end = i - 1;
-            if(cur != next && next == -1)
-                cnt_down++;
-            cur = next;
+    int i = 0;
+    while(i + 1 < n && num[i] < num[i + 1])
+        i++;
+    if(i + 1 == n)
+        cout << "yes\n1 1";
+    else {
+        int start = i;
+        int j = i + 2;
+        for(; j < n; ++j) {
+            if(num[j] > num[j - 1])
+                break;
         }
-        if(cnt_down == 0) {
-            cout << "YES\n"
-                 << "1 1";
-        } else if(cnt_down == 1) {
-            bool flag = true;
-            if(!(end + 1 < n && num[start] < num[end + 1]) || !(start - 1 >= 0 && num[end] > num[start - 1]))
+        int end = j - 1;
+        int left = start, right = end;
+        while(start < end) {
+            swap(num[start++], num[end--]);
+        }
+        bool flag = true;
+        for(int i = 1; i < n; ++i) {
+            if(num[i] < num[i - 1]) {
                 flag = false;
-            if(flag)
-                cout << "YES\n"
-                     << start << " " << end;
-            else
-                cout << "NO";
+                break;
+            }
+        }
+        if(flag) {
+            cout << "yes\n" << left + 1 << " " << right + 1;
         } else 
-            cout << "NO";
+            cout << "no";
     }
 
     return 0;
