@@ -3,27 +3,28 @@ using namespace std;
 int main() {
     int n = 0, m = 0;
     cin >> n >> m;
-    vector<pair<int, int>> arr_a(n, {0, 0});
-    vector<int> arr_b(m, 0);
+    vector<long long> arr_a(n, 0);
+    vector<long long> arr_b(m, 0);
     for(int i = 0; i < n; ++i) {
-        cin >> arr_a[i].first;
-        arr_a[i].second = i;
+        cin >> arr_a[i];
     }
     for(auto &x : arr_b)
         cin >> x;
-    sort(arr_a.begin(), arr_a.end(), [](const pair<int, int> &a, const pair<int, int> &b){return a.first <= b.first;});
+    sort(arr_a.begin(), arr_a.end());
     for(int i = 0; i < m; ++i) {
-        int t = arr_b[i];
+        long long t = arr_b[i];
         int left = 0, right = n;
         while(left < right) {
             int mid = left + (right - left) / 2;
-            if(arr_a[mid].first >= t) {
+            if(arr_a[mid] > t) {
                 right = mid;
+            } else if(arr_a[mid] < t){
+                left = mid + 1;
             } else {
                 left = mid + 1;
             }
         }
-        cout << arr_a[left - 1].second + 1;
+        cout << left;
         if(i != m - 1)
             cout << ' ';
     }
