@@ -9,7 +9,7 @@ long long func(int n) {
 int main() {
     string str1, str2;
     cin >> str1 >> str2;
-    int cnt1_p = 0,cnt1_n, cnt2_p = 0, cnt2_n;
+    int cnt1_p = 0, cnt1_n = 0, cnt2_p = 0, cnt2_n = 0;
     for(int i = 0; i < str1.size(); ++i) {
         if(str1[i] == '+')
             cnt1_p++;
@@ -39,7 +39,7 @@ int main() {
         } else
             ans = 0;
     }
-    cout << ans;
+    cout << fixed << setprecision(9) << ans;
 
     return 0;
 }
