@@ -17,7 +17,7 @@ int main() {
             }
             int len = (i - 1 - last + 1);
             if(len >= 2) {
-                interval.emplace_back(last, last + len - 1);
+                interval.emplace_back(last + 1, last + len - 1 + 1);
             }
             last = i;
         }
@@ -34,39 +34,42 @@ int main() {
                 bool flag = false;
                 while(left < right) {
                     mid = left + (right - left) / 2;
-                    if(a > interval[mid].first + 1) {
+                    if(a > interval[mid].first) {
                         left = mid + 1;
-                    } else if(a < interval[mid].first + 1) {
+                    } else if(a < interval[mid].first) {
                         right = mid;
                     } else {
                         flag = true;
                         break;
                     }
                 }
-                if(!flag && (left == 0 || left == n)) {
-                    cout << a << ' ' << b;
-                } else {
-                    bool ans = true;
-                    int L = 0, R = 0;
-                    if(flag) {
-                        if(b <= interval[mid].second + 1) {
-                            ans = false;
-                        } else {
-                            L = a, R = interval[mid].second + 1 + 1;
-                        }
+                
+                bool ans = true;
+                int L = 0, R = 0;
+                int pos = 0;
+                if(flag)
+                    pos = mid + 1;
+                else
+                    pos = left;
+                if(pos - 1 >= 0) {
+                    if(b <= interval[pos - 1].second) {
+                        ans = false;
                     } else {
-                        if(b <= interval[left - 1].second + 1) {
-                            ans = false;
+                        if(a <= interval[pos - 1].second) {
+                            L = interval[pos - 1].second, R = L + 1;
                         } else {
-                            L = a, R = interval[left - 1].second + 1 + 1;
+                            L = a, R = a + 1;
                         }
                     }
-                    if(ans) {
-                        cout << L << ' ' << R;
-                    } else 
-                        cout << -1 << ' ' << -1;
+                } else {
+                    L = a, R = a + 1;
                 }
-   
+
+                if(ans) {
+                    cout << L << ' ' << R;
+                } else 
+                    cout << -1 << ' ' << -1;
+                
             }
         
             cout << '\n';
