@@ -14,24 +14,26 @@ int main() {
         }
         long long max = 0, cur = 0;
         int i = 0;
-        while(i < n) {
-            int j = i;
-            while(j < n && num[j] >= 0) {
-                cur += num[j];
-                j++;
-            }
-            if(j == n) {
-                if(j - 1 - i + 1 < n && cur > max)
-                    max = cur;
+        for(; i < n; ++i) {
+            if(num[i] > 0)
                 break;
-            } else {
-                if(cur > max)
-                    max = cur;
-                cur = 0;
-            }
-            i = j + 1;
         }
-        
+        if(i == n) {
+            max = *max_element(num.begin(), num.end());
+        } else {
+            int cnt = 0;
+            for(int j = i; j < n; ++j) {
+                cur += num[j];
+                cnt++;
+                if(cur > 0) {
+                    if(cur > max && cnt < n)
+                        max = cur;
+                } else {
+                    cur = 0;
+                    cnt = 0;
+                }
+            }
+        }
 
         if(total > max)
             cout << "YES";
