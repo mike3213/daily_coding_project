@@ -3,7 +3,7 @@ using namespace std;
 int main(void) {
     int m = 0, s = 0;
     cin >> m >> s;
-    if(s < 1 || s > m * 9)
+    if(s < 1 && m > 1 || s > m * 9)
         cout << "-1 -1";
     else {
         vector<int> ans(m, 0);
@@ -17,7 +17,7 @@ int main(void) {
             }
         }
         vector<int> copy(ans);
-        if(copy.back() == 0) {
+        if(copy.back() == 0 && copy.size() > 1) {
             copy[copy.size() - 1] = 1;
             for(int i = copy.size() - 2; i >= 0; --i) {
                 if(copy[i] != 0) {
