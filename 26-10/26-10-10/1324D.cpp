@@ -14,19 +14,19 @@ int main(void) {
     sort(diff.begin(), diff.end());
     long long cnt = 0;
     for(int i = 0; i < n; ++i) {
-        int left = 0, right = i + 1;
+        int left = 0, right = i;
         int target = diff[i];
         while(left < right) {
             int mid = left + (right - left) / 2;
-            if(target < diff[mid]) {
-                right = mid;
-            } else if(target > diff[mid]) {
+            if(target < -diff[mid]) {
                 left = mid + 1;
-            } else {
+            } else if(target > -diff[mid]) {
                 right = mid;
+            } else {
+                left = mid + 1;
             }
         }
-        cnt += left; 
+        cnt += (i - left); 
     }
     cout << cnt;
     return 0;
