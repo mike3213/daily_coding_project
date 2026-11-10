@@ -13,7 +13,6 @@ public:
                 left = mid + 1;
         }
         int first = left;
-        
         left = 0, right = nums.size();
         while(left <right) {
             int mid = left + (right - left) / 2;
@@ -30,7 +29,7 @@ public:
             return vector<int>({first, second});
     }
 };
-
+ 
 int main(void) {
 
 
