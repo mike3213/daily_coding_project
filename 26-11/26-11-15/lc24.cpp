@@ -13,14 +13,16 @@ class Solution {
 public:
     ListNode* swapPairs(ListNode* head) {
         ListNode *dummy = new ListNode(0, head);
-        ListNode *pre = dummy, *cur = dummy->next, *next = nullptr;
-        if(cur)
-            next = cur->next;
-        while(cur && next) {
+        ListNode *pre = dummy;
+        while(pre->next && pre->next->next) {
+            ListNode *p = pre->next;
+            pre->next = p->next;
+            p->next = p->next->next;
+            pre->next->next = p;
             
-            cur->next = pre;
-            next->next = cur;
+            pre = p;
         }
+        return dummy->next;
     }
 };
 
